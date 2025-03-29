@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"log"
 	"net/http"
 	"os"
@@ -12,13 +11,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var DB *sql.DB
-
 func main() {
 	if len(os.Args) > 2 {
 		log.Println("Usage: go run main.go OR go run main.go [PORT]")
 		return
 	}
+
+	_ = os.Mkdir("data", 0o700)
 
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -26,12 +25,8 @@ func main() {
 		return
 	}
 
-	DB, err := database.InitDB()
-	if err != nil {
-		log.Printf("Failed to initialize database: %v\n", err)
-		return
-	}
-	defer DB.Close()
+	database.InitDB()
+	defer database.DB.Close()
 
 	routes.InitRoutes()
 
