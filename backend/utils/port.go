@@ -19,7 +19,7 @@ func GetPort() (string, error) {
 
 		portNum, err := strconv.Atoi(port)
 		if err != nil || portNum < 1024 || portNum > 65535 {
-			log.Printf("Failed validating port: %v\n\nSwitching to default port 10000\n", err)
+			log.Printf("Failed validating port: %v. Switching to default port 10000\n", err)
 			port = ":10000"
 		} else {
 			port = ":" + port
