@@ -84,7 +84,7 @@ header .navbar .theme-toggler .tooltip-text {
   display: none;
   position: absolute;
   top: 35%;
-  right: 5%;
+  right: 3%;
   font-size: 10px;
   transform: translateX(-50%);
   background-color: var(--deep-black);
@@ -158,7 +158,8 @@ main {
   background-color: #f44336 !important;
 }
 
-.signup-container {
+.signup-container,
+.signin-container {
   width: 50%;
   background-color: var(--deep-white);
   padding: 2rem;
@@ -168,12 +169,14 @@ main {
   transition: var(--transition);
 }
 
-body.dark-mode .signup-container {
+body.dark-mode .signup-container,
+body.dark-mode .signin-container {
   background: var(--deep-black);
   box-shadow: var(--dark-box-shadow);
 }
 
-.signup-container h3 {
+.signup-container h3,
+.signin-container h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -247,7 +250,8 @@ body.dark-mode input {
   font-size: 1rem;
 }
 
-.sign-up-btn {
+.sign-up-btn,
+.sign-in-btn {
   width: 100%;
   padding: 0.75rem;
   margin-top: 1rem;
