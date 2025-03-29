@@ -8,6 +8,10 @@ import (
 
 // InsertUser inserts a new user into the database.
 func InsertUser(db *sql.DB, table string, fields []string, values ...interface{}) (int64, error) {
+	if db == nil {
+		return 0, fmt.Errorf("database connection is nil")
+	}
+
 	columnString := strings.Join(fields, ", ")
 	valueString := strings.Repeat("?, ", len(fields))
 	valueString = strings.TrimSuffix(valueString, ", ")
