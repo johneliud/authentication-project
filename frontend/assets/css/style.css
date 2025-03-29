@@ -14,6 +14,10 @@
   --dark-box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.1);
 }
 
+button:hover {
+  opacity: 0.7;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -69,7 +73,6 @@ header .navbar .logo a {
 }
 
 header .navbar .theme-toggler {
-  width: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,7 +84,7 @@ header .navbar .theme-toggler .tooltip-text {
   display: none;
   position: absolute;
   top: 35%;
-  right: 8%;
+  right: 5%;
   font-size: 10px;
   transform: translateX(-50%);
   background-color: var(--deep-black);
@@ -115,4 +118,180 @@ header .navbar .theme-toggler.active .moon {
 
 body.dark-mode header .navbar .theme-toggler box-icon {
   fill: var(--deep-white);
+}
+
+main {
+  flex: 1;
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.feedback-popup {
+  position: absolute;
+  top: 70px;
+  right: -60px;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: var(--deep-white);
+  padding: 10px 20px;
+  border-radius: 10px;
+  visibility: hidden;
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 100;
+}
+
+.feedback-popup.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.feedback-popup.success {
+  background-color: #4caf50 !important;
+}
+
+.feedback-popup.error {
+  background-color: #f44336 !important;
+}
+
+.signup-container {
+  width: 50%;
+  background-color: var(--deep-white);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--light-box-shadow);
+  text-align: center;
+  transition: var(--transition);
+}
+
+body.dark-mode .signup-container {
+  background: var(--deep-black);
+  box-shadow: var(--dark-box-shadow);
+}
+
+.signup-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+body.dark-mode label {
+  color: var(--deep-white);
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 0;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: var(--transition);
+}
+
+body.dark-mode input {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-names,
+.password {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1rem;
+}
+
+.input-group {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.password-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 2.5rem;
+}
+
+.toggle-password-visibility {
+  position: absolute;
+  right: 0;
+  top: 9px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.toggle-password-visibility box-icon {
+  fill: var(--primary-color);
+  font-size: 1rem;
+}
+
+.sign-up-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: var(--primary-color);
+  color: var(--deep-white);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.oauth-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  column-gap: 10px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color var(--transition);
+  background-color: var(--primary-color);
+  color: var(--deep-white);
+  box-shadow: var(--light-box-shadow);
+}
+
+.google-btn box-icon {
+  fill: var(--deep-white);
+}
+
+.switch-form {
+  margin-top: 1rem;
 }
