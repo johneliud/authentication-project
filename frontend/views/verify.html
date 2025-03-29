@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+
+    <title>Email Verification</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" id="navbar">
+        <div class="logo">
+          <a href="/">Authentication</a>
+        </div>
+
+        <div class="theme-toggler" id="themeToggler">
+          <p class="tooltip-text">Toggle Theme</p>
+
+          <box-icon class="sun" id="sun" name="sun"></box-icon>
+          <box-icon class="moon" id="moon" name="moon"></box-icon>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="verification-container">
+        <h3>Email Verification</h3>
+        <p>Enter the verification code sent to your email.</p>
+
+        <form class="verification-form" id="verificationForm">
+          <div class="input-group">
+            <label for="verification-code">Verification Code</label>
+            <input
+              type="text"
+              id="verification-code"
+              name="verification_code"
+              required
+            />
+          </div>
+
+          <button type="submit" class="verification-btn" id="verificationBtn">Verify</button>
+        </form>
+
+        <p class="switch-form">
+          Didn't receive the code? <a href="/verify" id="resend-code">Resend</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Box icons -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <script src="/frontend/js/script.js"></script>
+  </body>
+</html>
