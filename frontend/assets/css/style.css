@@ -1,1 +1,118 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+:root {
+  --primary-color: #023e8a;
+  --secondary-color: #0077b6;
+  --utility-color: #ff9e00;
+  --tertiary-color: #ff6d00;
+  --deep-black: #000000;
+  --deep-white: #ffffff;
+
+  --transition: 0.5s ease-in-out;
+
+  --light-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  --dark-box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: League Spartan, sans-serif;
+}
+
+body {
+  background-color: var(--deep-white);
+  color: var(--deep-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+body.dark-mode {
+  background-color: var(--deep-black);
+  color: var(--deep-white);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1000;
+  background-color: var(--deep-white);
+  box-shadow: var(--light-box-shadow);
+  transition: var(--transition);
+}
+
+body.dark-mode header {
+  background-color: var(--deep-black);
+  box-shadow: var(--dark-box-shadow);
+}
+
+header .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 20px;
+}
+
+header .navbar .logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+header .navbar .theme-toggler {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+header .navbar .theme-toggler .tooltip-text {
+  display: none;
+  position: absolute;
+  top: 35%;
+  right: 8%;
+  font-size: 10px;
+  transform: translateX(-50%);
+  background-color: var(--deep-black);
+  color: var(--deep-white);
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: var(--light-box-shadow);
+  transition: var(--transition);
+}
+
+body.dark-mode header .navbar .theme-toggler .tooltip-text {
+  background-color: var(--deep-white);
+  color: var(--deep-black);
+}
+
+header .navbar .theme-toggler:hover .tooltip-text {
+  display: block;
+}
+
+header .navbar .theme-toggler .sun {
+  display: none;
+}
+
+header .navbar .theme-toggler.active .sun {
+  display: block;
+}
+
+header .navbar .theme-toggler.active .moon {
+  display: none;
+}
+
+body.dark-mode header .navbar .theme-toggler box-icon {
+  fill: var(--deep-white);
+}
