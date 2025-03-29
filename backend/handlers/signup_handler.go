@@ -1,13 +1,13 @@
 package handlers
 
 import (
-	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
 	"strings"
 	"text/template"
 
+	"github.com/johneliud/authentication_project/backend/database"
 	"github.com/johneliud/authentication_project/backend/models"
 	"github.com/johneliud/authentication_project/backend/utils"
 )
@@ -16,8 +16,6 @@ type Response struct {
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 }
-
-var db *sql.DB
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/sign-up" {
@@ -70,7 +68,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_, err = utils.InsertUser(db, "users", []string{"first_name", "last_name", "email", "user_password"}, user.FirstName, user.FirstName, user.Email, string(hashedPassword))
+		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "user_password"}, user.FirstName, user.FirstName, user.Email, string(hashedPassword))
 		if err != nil {
 			log.Printf("Error adding user: %v\n", err)
 			http.Redirect(w, r, "/sign-in", http.StatusSeeOther)
