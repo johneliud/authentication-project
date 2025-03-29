@@ -3,26 +3,34 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
+var DB *sql.DB
+
 // InitDB initializes the database and returns a pointer to the database.
-func InitDB() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "./data/authentication.db")
+func InitDB() {
+	DB, err := sql.Open("sqlite3", "./data/authentication.db")
 	if err != nil {
-		return nil, fmt.Errorf("could not open database: %v", err)
+		log.Printf("Could not open database: %v", err)
+		return
 	}
 
-	err = db.Ping()
+	err = DB.Ping()
 	if err != nil {
-		return nil, fmt.Errorf("could not ping database: %v", err)
+		log.Printf("Could not ping database: %v", err)
+		return
 	}
 
-	err = executeSchema(db)
+	err = executeSchema(DB)
 	if err != nil {
-		return nil, fmt.Errorf("could not execute schema: %v", err)
+		log.Printf("Could not execute schema: %v", err)
+		return
 	}
-	return db, nil
+	log.Println("Database initialized successfully")
 }
 
 // executeSchema reads the schema file and executes it on the database.
