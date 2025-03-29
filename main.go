@@ -21,12 +21,16 @@ func main() {
 
 	err := godotenv.Load(".env")
 	if err != nil {
-		log.Printf("Failed to load .env file: %v\n", err)
-		return
+		log.Printf("Failed to load .env file: %v. Using default values\n", err)
 	}
 
 	database.InitDB()
-	defer database.DB.Close()
+
+	defer func() {
+		if database.DB != nil {
+			database.DB.Close()
+		}
+	}()
 
 	routes.InitRoutes()
 
