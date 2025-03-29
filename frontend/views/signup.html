@@ -24,6 +24,91 @@
       </nav>
     </header>
 
+    <main>
+      <p class="feedback-popup" id="feedbackPopup"></p>
+      <div class="signup-container" id="signupContainer">
+        <h3>Sign Up</h3>
+
+        <form
+          class="signup-form"
+          action="/sign-up"
+          id="signupForm"
+          method="POST"
+        >
+          <div class="user-names">
+            <div class="input-group">
+              <label for="first-name">First Name</label>
+              <input type="text" id="firstName" name="first-name" required />
+            </div>
+
+            <div class="input-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="lastName" name="last-name" required />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="password">
+            <div class="input-group">
+              <label for="password">Password</label>
+              <div class="password-wrapper">
+                <input type="password" id="password" name="password" required />
+                <button
+                  type="button"
+                  class="toggle-password-visibility"
+                  data-target="password"
+                >
+                  <box-icon name="show"></box-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="confirmed-password">Confirm Password</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="confirmedPassword"
+                  name="confirmed-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password-visibility"
+                  data-target="confirmed-password"
+                >
+                  <box-icon name="show"></box-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="sign-up-btn btn">Create Account</button>
+        </form>
+
+        <br />
+
+        <p class="continue-with" style="font-size: small">Or Continue With</p>
+
+        <br />
+
+        <div class="oauth-buttons">
+          <button type="button" class="oauth-google-btn">
+            <box-icon type="logo" name="google"></box-icon>
+            Google
+          </button>
+        </div>
+
+        <p class="switch-form">
+          Already have an account? <a href="/sign-in" data-link>Sign In</a>
+        </p>
+      </div>
+    </main>
+
     <!-- Box icons -->
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
