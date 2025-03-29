@@ -21,7 +21,7 @@ function applyTheme() {
 document.addEventListener('DOMContentLoaded', applyTheme);
 
 // showFeedback displays a pop-up message with a success or error message.
-export function showFeedback(message, isSuccess) {
+function showFeedback(message, isSuccess) {
   const feedbackPopup = document.getElementById('feedbackPopup');
 
   feedbackPopup.textContent = message;
