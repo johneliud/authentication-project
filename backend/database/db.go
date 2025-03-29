@@ -13,7 +13,9 @@ var DB *sql.DB
 
 // InitDB initializes the database and returns a pointer to the database.
 func InitDB() {
-	DB, err := sql.Open("sqlite3", "./data/authentication.db")
+	var err error
+
+	DB, err = sql.Open("sqlite3", "./data/authentication.db")
 	if err != nil {
 		log.Printf("Could not open database: %v", err)
 		return
