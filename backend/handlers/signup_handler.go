@@ -2,10 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
-	"strings"
 	"text/template"
 
 	"github.com/johneliud/authentication_project/backend/database"
@@ -39,9 +37,9 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
 		}
 	case http.MethodPost:
-		var userData models.User
+		var user models.User
 
-		if err := json.NewDecoder(r.Body).Decode(&userData); err != nil {
+		if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 			log.Printf("Failed to decode request body: %v\n", err)
 			w.Header().Set("Content-Type", "application/json")
 			response := Response{Success: false, Message: err.Error()}
@@ -49,16 +47,6 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		defer r.Body.Close()
-
-		user := models.User{
-			FirstName:         strings.TrimSpace(userData.FirstName),
-			LastName:          strings.TrimSpace(userData.LastName),
-			Email:             strings.TrimSpace(userData.Email),
-			Password:          strings.TrimSpace(userData.Password),
-			ConfirmedPassword: strings.TrimSpace(userData.ConfirmedPassword),
-		}
-
-		fmt.Println("user", user)
 
 		if err := utils.ValidateUserFields(user.FirstName, user.LastName, user.Email, user.Password, user.ConfirmedPassword); err != nil {
 			log.Printf("Failed to validate user fields: %v\n", err)
@@ -75,7 +63,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "user_password"}, user.FirstName, user.LastName, user.Email, string(hashedPassword))
+		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "password_hash"}, user.FirstName, user.LastName, user.Email, string(hashedPassword))
 		if err != nil {
 			log.Printf("Error adding user: %v\n", err)
 			response := Response{Success: false, Message: err.Error()}
