@@ -51,8 +51,16 @@ signupForm.addEventListener("submit", async (event) => {
     password,
     confirmedPassword
   );
-  showFeedback(passwordError, false);
-  showFeedback(confirmedPasswordError, false);
+
+  if (passwordError) {
+    showFeedback(passwordError, false);
+    return;
+  }
+
+  if (confirmedPasswordError) {
+    showFeedback(confirmedPasswordError, false);
+    return;
+  }
 
   const submitBtn = document.getElementById("signupBtn");
   submitBtn.disabled = true;
