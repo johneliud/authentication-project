@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+
+    <title>Sign In</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" id="navbar">
+        <div class="logo">
+          <a href="/">Authentication</a>
+        </div>
+
+        <div class="theme-toggler" id="themeToggler">
+          <p class="tooltip-text">Toggle Theme</p>
+
+          <box-icon class="sun" id="sun" name="sun"></box-icon>
+          <box-icon class="moon" id="moon" name="moon"></box-icon>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <p class="feedback-popup" id="feedbackPopup"></p>
+      <div class="signin-container" id="signinContainer">
+        <h3>Sign In</h3>
+
+        <form
+          class="signin-form"
+          action="/sign-in"
+          id="signinForm"
+          method="POST"
+        >
+          <div class="input-group">
+            <label for="identifier">Username/Email</label>
+            <input type="text" id="identifier" name="identifier" required />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="password" name="password" required />
+              <button
+                type="button"
+                class="toggle-password-visibility"
+                data-target="password"
+              >
+                <box-icon name="show"></box-icon>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="sign-in-btn" id="signinBtn">
+            Log In
+          </button>
+        </form>
+
+        <br />
+
+        <p class="continue-with" style="font-size: small">Or Continue With</p>
+
+        <div class="oauth-container">
+          <button type="button" class="google-btn">
+            <box-icon type="logo" name="google"></box-icon>
+            Google
+          </button>
+        </div>
+
+        <p class="switch-form">
+          Don't have an account? <a href="/sign-up" data-link>Sign Up</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Box icons -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <script src="/frontend/js/script.js"></script>
+  </body>
+</html>
