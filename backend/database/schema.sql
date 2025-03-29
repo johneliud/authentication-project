@@ -8,5 +8,3 @@ CREATE TABLE IF NOT EXISTS users (
     verification_code TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE INDEX idx_email ON users(email);
