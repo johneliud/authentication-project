@@ -1,28 +1,28 @@
-import { showFeedback } from './script.js';
+import { showFeedback } from "./script.js";
 
 // validatePassword checks if the password is valid
 function validatePassword(password) {
-  if (password.length < 8) return 'Password must be at least 8 characters long';
+  if (password.length < 8) return "Password must be at least 8 characters long";
 
   if (!password.match(/[A-Z]/))
-    return 'Password must contain at least one uppercase letter';
+    return "Password must contain at least one uppercase letter";
 
   if (!password.match(/[a-z]/))
-    return 'Password must contain at least one lowercase letter';
+    return "Password must contain at least one lowercase letter";
 
   if (!password.match(/[0-9]/))
-    return 'Password must contain at least one number';
+    return "Password must contain at least one number";
 
   if (!password.match(/[^A-Za-z0-9]/))
-    return 'Password must contain at least one special character';
+    return "Password must contain at least one special character";
 
-  return '';
+  return "";
 }
 
-const passwordInput = document.getElementById('password');
-const confirmedPasswordInput = document.getElementById('confirmedPassword');
+const passwordInput = document.getElementById("password");
+const confirmedPasswordInput = document.getElementById("confirmedPassword");
 
-passwordInput.addEventListener('input', () => {
+passwordInput.addEventListener("input", () => {
   const password = passwordInput.value;
   const confirmedPassword = confirmedPasswordInput.value;
   const passwordError = validatePassword(password);
@@ -36,26 +36,36 @@ passwordInput.addEventListener('input', () => {
 
 // validateConfirmedPassword checks if the confirmed password is valid
 function validateConfirmedPassword(password, confirmedPassword) {
-  if (password !== confirmedPassword) return 'Passwords do not match';
-  return '';
+  if (password !== confirmedPassword) return "Passwords do not match";
+  return "";
 }
 
-const signupForm = document.getElementById('signupForm');
+// Password toggle visibility
+const visibilityBtns = document.querySelectorAll(".toggle-password-visibility");
 
-signupForm.addEventListener('submit', async (event) => {
+visibilityBtns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const input = document.getElementById(btn.dataset.target);
+    input.type = input.type === "password" ? "text" : "password";
+  });
+});
+
+const signupForm = document.getElementById("signupForm");
+
+signupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const submitBtn = document.getElementById('signupBtn');
-  submitBtn.textContent = 'Signing Up...';
+  const submitBtn = document.getElementById("signupBtn");
   submitBtn.disabled = true;
 
   const formData = new FormData(signupForm);
 
   try {
-    const response = await fetch('/sign-up', {
-      method: 'POST',
+    const response = await fetch("/sign-up", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(Object.fromEntries(formData)),
     });
@@ -68,11 +78,11 @@ signupForm.addEventListener('submit', async (event) => {
       showFeedback(error.message, false);
     }
     signupForm.reset();
-    submitBtn.textContent = 'Sign Up';
+    submitBtn.textContent = "Create Account";
     submitBtn.disabled = false;
 
     setTimeout(() => {
-      window.location.href = '/verify';
+      window.location.href = "/verify";
     }, 1000);
   } catch (error) {
     console.error(error);
