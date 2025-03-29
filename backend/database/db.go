@@ -3,31 +3,26 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 )
 
 // InitDB initializes the database and returns a pointer to the database.
-func InitDB() *sql.DB {
+func InitDB() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./data/authentication.db")
 	if err != nil {
-		log.Printf("Could not open database: %v\n", err)
-		return nil
+		return nil, fmt.Errorf("could not open database: %v", err)
 	}
 
 	err = db.Ping()
 	if err != nil {
-		log.Printf("Could not ping database: %v\n", err)
-		return nil
+		return nil, fmt.Errorf("could not ping database: %v", err)
 	}
 
 	err = executeSchema(db)
 	if err != nil {
-		log.Printf("Could not execute schema: %v\n", err)
-		return nil
+		return nil, fmt.Errorf("could not execute schema: %v", err)
 	}
-	log.Println("Database initialized successfully")
-	return db
+	return db, nil
 }
 
 // executeSchema reads the schema file and executes it on the database.
