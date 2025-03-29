@@ -20,6 +20,7 @@ function applyTheme() {
 
 document.addEventListener('DOMContentLoaded', applyTheme);
 
+// showFeedback displays a pop-up message with a success or error message.
 export function showFeedback(message, isSuccess) {
   const feedbackPopup = document.getElementById('feedbackPopup');
 
@@ -32,3 +33,14 @@ export function showFeedback(message, isSuccess) {
     feedbackPopup.classList.remove('show', 'success', 'error');
   }, 3000);
 }
+
+// Password toggle visibility
+const passwordInputs = document.querySelectorAll('.toggle-password-visibility');
+
+passwordInputs.forEach((passInput) => {
+  passInput.addEventListener('click', (event) => {
+    event.preventDefault();
+    const input = document.getElementById(passInput.dataset.target);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+});
