@@ -19,3 +19,16 @@ function applyTheme() {
 }
 
 document.addEventListener('DOMContentLoaded', applyTheme);
+
+export function showMessage(message, isSuccess) {
+  const feedbackPopup = document.getElementById('feedbackPopup');
+
+  feedbackPopup.textContent = message;
+  feedbackPopup.classList.remove('success', 'error');
+
+  feedbackPopup.classList.add('show', isSuccess ? 'success' : 'error');
+
+  setTimeout(() => {
+    feedbackPopup.classList.remove('show', 'success', 'error');
+  }, 3000);
+}
