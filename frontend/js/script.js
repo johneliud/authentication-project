@@ -20,7 +20,7 @@ function applyTheme() {
 
 document.addEventListener('DOMContentLoaded', applyTheme);
 
-export function showMessage(message, isSuccess) {
+export function showFeedback(message, isSuccess) {
   const feedbackPopup = document.getElementById('feedbackPopup');
 
   feedbackPopup.textContent = message;
