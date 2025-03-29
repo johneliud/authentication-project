@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -38,26 +39,32 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
 		}
 	case http.MethodPost:
-		var user models.User
+		var userData models.User
 
-		if err := r.ParseForm(); err != nil {
-			log.Printf("Failed to parse form: %v\n", err)
-			http.Error(w, "Internal server error", http.StatusInternalServerError)
+		if err := json.NewDecoder(r.Body).Decode(&userData); err != nil {
+			log.Printf("Failed to decode request body: %v\n", err)
+			w.Header().Set("Content-Type", "application/json")
+			response := Response{Success: false, Message: err.Error()}
+			json.NewEncoder(w).Encode(response)
 			return
 		}
+		defer r.Body.Close()
 
-		user.FirstName = strings.TrimSpace(r.FormValue("first_name"))
-		user.LastName = strings.TrimSpace(r.FormValue("last_name"))
-		user.Email = strings.TrimSpace(r.FormValue("email"))
-		user.Password = strings.TrimSpace(r.FormValue("password"))
-		user.ConfirmedPassword = strings.TrimSpace(r.FormValue("confirmed_password"))
+		user := models.User{
+			FirstName:         strings.TrimSpace(userData.FirstName),
+			LastName:          strings.TrimSpace(userData.LastName),
+			Email:             strings.TrimSpace(userData.Email),
+			Password:          strings.TrimSpace(userData.Password),
+			ConfirmedPassword: strings.TrimSpace(userData.ConfirmedPassword),
+		}
+
+		fmt.Println("user", user)
 
 		if err := utils.ValidateUserFields(user.FirstName, user.LastName, user.Email, user.Password, user.ConfirmedPassword); err != nil {
 			log.Printf("Failed to validate user fields: %v\n", err)
 			response := Response{Success: false, Message: err.Error()}
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(response)
-			http.Error(w, "Bad request", http.StatusBadRequest)
 			return
 		}
 
@@ -68,16 +75,17 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "user_password"}, user.FirstName, user.FirstName, user.Email, string(hashedPassword))
+		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "user_password"}, user.FirstName, user.LastName, user.Email, string(hashedPassword))
 		if err != nil {
 			log.Printf("Error adding user: %v\n", err)
-			http.Redirect(w, r, "/sign-in", http.StatusSeeOther)
+			response := Response{Success: false, Message: err.Error()}
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
 			return
 		}
-		response := Response{Success: true, Message: "Success"}
+		response := Response{Success: true, Message: "Registration successful"}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)
-		http.Redirect(w, r, "/verify", http.StatusSeeOther)
 		return
 
 	default:
