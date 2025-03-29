@@ -87,10 +87,4 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-
-	if r.Method != http.MethodPost {
-		log.Printf("Method not allowed: %s\n", r.Method)
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
 }
