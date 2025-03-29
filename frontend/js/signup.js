@@ -22,18 +22,6 @@ function validatePassword(password) {
 const passwordInput = document.getElementById("password");
 const confirmedPasswordInput = document.getElementById("confirmedPassword");
 
-passwordInput.addEventListener("input", () => {
-  const password = passwordInput.value;
-  const confirmedPassword = confirmedPasswordInput.value;
-  const passwordError = validatePassword(password);
-  const confirmedPasswordError = validateConfirmedPassword(
-    password,
-    confirmedPassword
-  );
-  showFeedback(passwordError, false);
-  showFeedback(confirmedPasswordError, false);
-});
-
 // validateConfirmedPassword checks if the confirmed password is valid
 function validateConfirmedPassword(password, confirmedPassword) {
   if (password !== confirmedPassword) return "Passwords do not match";
@@ -55,6 +43,16 @@ const signupForm = document.getElementById("signupForm");
 
 signupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const password = passwordInput.value;
+  const confirmedPassword = confirmedPasswordInput.value;
+  const passwordError = validatePassword(password);
+  const confirmedPasswordError = validateConfirmedPassword(
+    password,
+    confirmedPassword
+  );
+  showFeedback(passwordError, false);
+  showFeedback(confirmedPasswordError, false);
 
   const submitBtn = document.getElementById("signupBtn");
   submitBtn.disabled = true;
