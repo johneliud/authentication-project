@@ -2,12 +2,9 @@ package middleware
 
 import (
 	"net/http"
-	"os"
 
-	"github.com/gorilla/sessions"
+	"github.com/johneliud/authentication_project/backend/config"
 )
-
-var Store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 
 // SessionMiddleware is a middleware that checks if the user is authenticated and redirects to the sign-in page if not.
 func SessionMiddleware(next http.Handler) http.Handler {
@@ -18,7 +15,7 @@ func SessionMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		session, err := Store.Get(r, "session")
+		session, err := config.Store.Get(r, "session")
 		if err != nil {
 			http.Redirect(w, r, "/sign-in", http.StatusSeeOther)
 			return
