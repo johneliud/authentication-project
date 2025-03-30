@@ -20,7 +20,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("frontend/views/home.html")
+	tmpl, err := template.ParseFiles("frontend/views/index.html")
 	if err != nil {
 		log.Printf("Failed to parse template: %v\n", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
