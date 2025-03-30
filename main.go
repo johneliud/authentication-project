@@ -9,7 +9,6 @@ import (
 	"github.com/johneliud/authentication_project/backend/database"
 	"github.com/johneliud/authentication_project/backend/routes"
 	"github.com/johneliud/authentication_project/backend/utils"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -19,11 +18,6 @@ func main() {
 	}
 
 	_ = os.Mkdir("data", 0o700)
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Printf("Failed to load .env file: %v. Using default values\n", err)
-	}
 
 	database.InitDB()
 
