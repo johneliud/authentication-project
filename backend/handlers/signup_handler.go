@@ -65,7 +65,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 		verificationCode := utils.GenerateVerificationCode()
 
-		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "password_hash, verification_code"}, user.FirstName, user.LastName, user.Email, string(hashedPassword), verificationCode)
+		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "password_hash", "verification_code"}, user.FirstName, user.LastName, user.Email, string(hashedPassword), verificationCode)
 		if err != nil {
 			log.Printf("Error adding user: %v\n", err)
 			response := Response{Success: false, Message: err.Error()}

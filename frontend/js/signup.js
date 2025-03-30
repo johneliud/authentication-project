@@ -79,6 +79,10 @@ signupForm.addEventListener("submit", async (event) => {
     if (response.ok) {
       const data = await response.json();
       showFeedback(data.message, data.success);
+
+      setTimeout(() => {
+        window.location.href = "/verify";
+      }, 1000);
     } else {
       const error = await response.json();
       showFeedback(error.message, false);
@@ -86,11 +90,7 @@ signupForm.addEventListener("submit", async (event) => {
     }
     signupForm.reset();
     submitBtn.textContent = "Create Account";
-    submitBtn.disabled = false;
-
-    setTimeout(() => {
-      window.location.href = "/verify";
-    }, 1000);
+    submitBtn.disabled = false;    
   } catch (error) {
     console.error(error);
   }
