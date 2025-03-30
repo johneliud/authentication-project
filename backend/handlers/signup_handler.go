@@ -63,7 +63,9 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "password_hash"}, user.FirstName, user.LastName, user.Email, string(hashedPassword))
+		verificationCode := utils.GenerateVerificationCode()
+
+		_, err = utils.InsertUser(database.DB, "users", []string{"first_name", "last_name", "email", "password_hash, verification_code"}, user.FirstName, user.LastName, user.Email, string(hashedPassword), verificationCode)
 		if err != nil {
 			log.Printf("Error adding user: %v\n", err)
 			response := Response{Success: false, Message: err.Error()}
@@ -71,6 +73,15 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			json.NewEncoder(w).Encode(response)
 			return
 		}
+
+		if err := utils.SendVerificationEmail(user.Email, verificationCode); err != nil {
+			log.Printf("Failed to send verification email: %v\n", err)
+			response := Response{Success: false, Message: err.Error()}
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
+			return
+		}
+		
 		response := Response{Success: true, Message: "Registration successful"}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)
