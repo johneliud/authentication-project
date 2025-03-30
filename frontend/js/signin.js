@@ -1,5 +1,14 @@
 import { showFeedback } from "./script.js";
 
+// Password toggle visibility
+const visibilityBtn = document.querySelector(".toggle-password-visibility");
+
+visibilityBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  const input = document.getElementById(visibilityBtn.dataset.target);
+  input.type = input.type === "password" ? "text" : "password";
+});
+
 const signinForm = document.getElementById("signinForm");
 const signinBtn = document.getElementById("signinBtn");
 
