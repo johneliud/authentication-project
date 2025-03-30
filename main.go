@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/johneliud/authentication_project/backend/config"
 	"github.com/johneliud/authentication_project/backend/database"
 	"github.com/johneliud/authentication_project/backend/routes"
 	"github.com/johneliud/authentication_project/backend/utils"
@@ -31,6 +32,8 @@ func main() {
 			database.DB.Close()
 		}
 	}()
+
+	config.InitSession()
 
 	routes.InitRoutes()
 
