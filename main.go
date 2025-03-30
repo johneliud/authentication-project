@@ -19,6 +19,7 @@ func main() {
 
 	_ = os.Mkdir("data", 0o700)
 
+	config.InitSession()
 	database.InitDB()
 
 	defer func() {
@@ -26,8 +27,6 @@ func main() {
 			database.DB.Close()
 		}
 	}()
-
-	config.InitSession()
 
 	routes.InitRoutes()
 
