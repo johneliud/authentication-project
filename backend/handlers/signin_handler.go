@@ -40,14 +40,25 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 			Password string `json:"password"`
 		}
 
-		if err := json.NewDecoder(r.Body).Decode(&credentials); err != nil {
-			log.Printf("Failed to decode request body: %v\n", err)
-			w.Header().Set("Content-Type", "application/json")
-			response := Response{Success: false, Message: err.Error()}
-			json.NewEncoder(w).Encode(response)
-			return
+		if r.Header.Get("Content-Type") == "application/json" {
+			if err := json.NewDecoder(r.Body).Decode(&credentials); err != nil {
+				log.Printf("Failed to decode JSON: %v\n", err)
+				w.Header().Set("Content-Type", "application/json")
+				response := Response{Success: false, Message: err.Error()}
+				json.NewEncoder(w).Encode(response)
+				return
+			}
+		} else {
+			if err := r.ParseForm(); err != nil {
+				log.Printf("Failed to parse form: %v\n", err)
+				w.Header().Set("Content-Type", "application/json")
+				response := Response{Success: false, Message: err.Error()}
+				json.NewEncoder(w).Encode(response)
+				return
+			}
+			credentials.Email = r.FormValue("email")
+			credentials.Password = r.FormValue("password")
 		}
-		defer r.Body.Close()
 
 		var user models.User
 
