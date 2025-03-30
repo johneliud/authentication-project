@@ -86,12 +86,11 @@ signupForm.addEventListener("submit", async (event) => {
     } else {
       const error = await response.json();
       showFeedback(error.message, false);
-      return;
     }
-    signupForm.reset();
-    submitBtn.textContent = "Create Account";
-    submitBtn.disabled = false;    
+    submitBtn.disabled = false;
   } catch (error) {
     console.error(error);
+    showFeedback("Failed to create account. Please try again.", false);
+    submitBtn.disabled = false;
   }
 });
