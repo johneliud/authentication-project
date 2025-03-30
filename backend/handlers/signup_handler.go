@@ -5,8 +5,10 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+	"time"
 
 	"github.com/johneliud/authentication_project/backend/database"
+	"github.com/johneliud/authentication_project/backend/middleware"
 	"github.com/johneliud/authentication_project/backend/models"
 	"github.com/johneliud/authentication_project/backend/utils"
 )
@@ -76,6 +78,27 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 		if err := utils.SendVerificationEmail(user.Email, verificationCode); err != nil {
 			log.Printf("Failed to send verification email: %v\n", err)
+			response := Response{Success: false, Message: err.Error()}
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
+			return
+		}
+
+		session, err := middleware.Store.Get(r, "session")
+		if err != nil {
+            log.Printf("Failed to get session: %v\n", err)
+            response := Response{Success: false, Message: err.Error()}
+            w.Header().Set("Content-Type", "application/json")
+            json.NewEncoder(w).Encode(response)
+            return
+        }
+
+		session.Values["authenticated"] = false
+		session.Values["email"] = user.Email
+		session.Values["created_at"] = time.Now().Unix()
+
+		if err := session.Save(r, w); err != nil {
+			log.Printf("Failed to save session: %v\n", err)
 			response := Response{Success: false, Message: err.Error()}
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(response)
