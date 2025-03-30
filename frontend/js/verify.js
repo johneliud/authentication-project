@@ -34,9 +34,9 @@ verificationForm.addEventListener("submit", async (event) => {
       }, 1000);
     } else {
       const errorData = await response.json();
-      showFeedback(errorData.error, false);
+      showFeedback(errorData.message || errorData.error, false);
     }
-    submitBtn.disabled = false;
+    verificationBtn.disabled = false;
   } catch (error) {
     console.error(error);
     showFeedback("Failed to verify. Please try again.", false);
