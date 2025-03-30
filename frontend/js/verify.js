@@ -1,0 +1,45 @@
+import { showFeedback } from "./script.js";
+
+const verificationForm = document.getElementById("verificationForm");
+const verificationCodeInput = document.getElementById("verificationCode");
+const verificationBtn = document.getElementById("verificationBtn");
+
+verificationForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const verificationCode = verificationCodeInput.value.trim();
+
+  if (!verificationCode) {
+    showFeedback("Please enter a verification code.", false);
+    return;
+  }
+
+  verificationBtn.disabled = true;
+
+  try {
+    const response = await fetch("/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ verification_code: verificationCode }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      showFeedback(data.message, data.success);
+
+      setTimeout(() => {
+        window.location.href = "/sign-in";
+      }, 1000);
+    } else {
+      const errorData = await response.json();
+      showFeedback(errorData.error, false);
+    }
+    submitBtn.disabled = false;
+  } catch (error) {
+    console.error(error);
+    showFeedback("Failed to verify. Please try again.", false);
+    verificationBtn.disabled = false;
+  }
+});
