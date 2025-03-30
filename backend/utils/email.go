@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"net/smtp"
 	"os"
@@ -24,4 +26,11 @@ func SendVerificationEmail(userEmail, verificationCode string) error {
 		return fmt.Errorf("failed to send email: %w", err)
 	}
 	return nil
+}
+
+// GenerateVerificationCode generates a random verification code.
+func GenerateVerificationCode() string {
+	bytes := make([]byte, 3)
+	rand.Read(bytes)
+	return hex.EncodeToString(bytes)
 }
