@@ -14,4 +14,5 @@ func InitRoutes() {
 	http.HandleFunc("/sign-up", handlers.SignupHandler)
 	http.HandleFunc("/verify", handlers.VerifyHandler)
 	http.HandleFunc("/sign-in", handlers.SigninHandler)
+	http.HandleFunc("/", handlers.HomeHandler)
 }
