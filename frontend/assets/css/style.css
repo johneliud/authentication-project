@@ -88,7 +88,6 @@ header .navbar .logout {
   cursor: pointer;
   transition: var(--transition);
   position: relative;
-  width: 100%;
 }
 
 .tooltip-text {
