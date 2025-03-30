@@ -7,8 +7,8 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/johneliud/authentication_project/backend/config"
 	"github.com/johneliud/authentication_project/backend/database"
-	"github.com/johneliud/authentication_project/backend/middleware"
 	"github.com/johneliud/authentication_project/backend/models"
 	"github.com/johneliud/authentication_project/backend/utils"
 )
@@ -84,14 +84,14 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		session, err := middleware.Store.Get(r, "session")
+		session, err := config.Store.Get(r, "session")
 		if err != nil {
-            log.Printf("Failed to get session: %v\n", err)
-            response := Response{Success: false, Message: err.Error()}
-            w.Header().Set("Content-Type", "application/json")
-            json.NewEncoder(w).Encode(response)
-            return
-        }
+			log.Printf("Failed to get session: %v\n", err)
+			response := Response{Success: false, Message: err.Error()}
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
+			return
+		}
 
 		session.Values["authenticated"] = false
 		session.Values["email"] = user.Email
@@ -104,7 +104,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			json.NewEncoder(w).Encode(response)
 			return
 		}
-		
+
 		response := Response{Success: true, Message: "Registration successful"}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)

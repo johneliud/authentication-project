@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"text/template"
 
+	"github.com/johneliud/authentication_project/backend/config"
 	"github.com/johneliud/authentication_project/backend/database"
-	"github.com/johneliud/authentication_project/backend/middleware"
 )
 
 // VerifyHandler handles the verification page.
@@ -34,7 +34,7 @@ func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	case http.MethodPost:
-		session, err := middleware.Store.Get(r, "session")
+		session, err := config.Store.Get(r, "session")
 		if err != nil {
 			log.Printf("Failed to get session: %v\n", err)
 			w.Header().Set("Content-Type", "application/json")

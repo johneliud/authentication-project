@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"text/template"
 
+	"github.com/johneliud/authentication_project/backend/config"
 	"github.com/johneliud/authentication_project/backend/database"
-	"github.com/johneliud/authentication_project/backend/middleware"
 	"github.com/johneliud/authentication_project/backend/models"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -78,7 +78,7 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		session, err := middleware.Store.Get(r, "session")
+		session, err := config.Store.Get(r, "session")
 		if err != nil {
 			log.Printf("Failed to get session: %v\n", err)
 			w.Header().Set("Content-Type", "application/json")
