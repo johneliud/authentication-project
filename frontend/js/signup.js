@@ -64,6 +64,7 @@ signupForm.addEventListener("submit", async (event) => {
 
   const submitBtn = document.getElementById("signupBtn");
   submitBtn.disabled = true;
+  submitBtn.textContent = "Creating account...";
 
   const formData = new FormData(signupForm);
 
@@ -88,9 +89,11 @@ signupForm.addEventListener("submit", async (event) => {
       showFeedback(error.message, false);
     }
     submitBtn.disabled = false;
+    submitBtn.textContent = "Create Account";
   } catch (error) {
     console.error(error);
     showFeedback("Failed to create account. Please try again.", false);
     submitBtn.disabled = false;
+    submitBtn.textContent = "Create Account";
   }
 });

@@ -16,6 +16,7 @@ signinForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   signinBtn.disabled = true;
+  signinBtn.textContent = "Logging in...";
 
   const formData = new FormData(signinForm);
 
@@ -39,10 +40,13 @@ signinForm.addEventListener("submit", async (event) => {
       const error = await response.json();
       showFeedback(error.message, false);
       signinBtn.disabled = false;
+      signinBtn.textContent = "Log In";
       return;
     }
   } catch (error) {
     console.error("Error:", error);
     showFeedback("Failed to sign in. Please try again.", false);
+    signinBtn.disabled = false;
+    signinBtn.textContent = "Log In";
   }
 });

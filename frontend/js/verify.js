@@ -15,6 +15,7 @@ verificationForm.addEventListener("submit", async (event) => {
   }
 
   verificationBtn.disabled = true;
+  verificationBtn.textContent = "Verifying...";
 
   try {
     const response = await fetch("/verify", {
@@ -37,9 +38,11 @@ verificationForm.addEventListener("submit", async (event) => {
       showFeedback(errorData.message || errorData.error, false);
     }
     verificationBtn.disabled = false;
+    verificationBtn.textContent = "Verify";
   } catch (error) {
     console.error(error);
     showFeedback("Failed to verify. Please try again.", false);
     verificationBtn.disabled = false;
+    verificationBtn.textContent = "Verify";
   }
 });
