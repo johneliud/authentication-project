@@ -13,13 +13,14 @@ import (
 // SendVerificationEmail sends an email to the user with a verification code.
 func SendVerificationEmail(userEmail, verificationCode string) error {
 	e := email.NewEmail()
-	e.From = "Authentication Project <johneliud4@gmail.com>"
+
+	e.From = "Authentication Project <" + os.Getenv("SMTP_EMAIL") + ">"
 	e.To = []string{userEmail}
 	e.Subject = "Email Verification Code"
 	e.Text = []byte(fmt.Sprintf("Your verification code is: %s", verificationCode))
 
-	smtpServer := "smtp.gmail.com"
-	smtpPort := "587"
+	smtpServer := os.Getenv("SMTP_SERVER")
+	smtpPort := os.Getenv("SMTP_PORT")
 	auth := smtp.PlainAuth("", os.Getenv("SMTP_EMAIL"), os.Getenv("SMTP_PASSWORD"), smtpServer)
 
 	if err := e.Send(smtpServer+":"+smtpPort, auth); err != nil {
