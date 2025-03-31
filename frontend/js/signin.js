@@ -29,8 +29,9 @@ signinForm.addEventListener("submit", async (event) => {
       body: JSON.stringify(Object.fromEntries(formData)),
     });
 
-    if (response.ok) {
-      const data = await response.json();
+    const data = await response.json();
+
+    if (response.ok && data.success) {
       showFeedback(data.message, data.success);
 
       setTimeout(() => {
@@ -48,5 +49,6 @@ signinForm.addEventListener("submit", async (event) => {
     showFeedback("Failed to sign in. Please try again.", false);
     signinBtn.disabled = false;
     signinBtn.textContent = "Log In";
+    return;
   }
 });

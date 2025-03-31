@@ -26,8 +26,9 @@ verificationForm.addEventListener("submit", async (event) => {
       body: JSON.stringify({ verification_code: verificationCode }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
+    const data = await response.json();
+
+    if (response.ok && data.success) {
       showFeedback(data.message, data.success);
 
       setTimeout(() => {
@@ -36,13 +37,15 @@ verificationForm.addEventListener("submit", async (event) => {
     } else {
       const errorData = await response.json();
       showFeedback(errorData.message || errorData.error, false);
+      verificationBtn.disabled = false;
+      verificationBtn.textContent = "Verify";
+      return;
     }
-    verificationBtn.disabled = false;
-    verificationBtn.textContent = "Verify";
   } catch (error) {
     console.error(error);
     showFeedback("Failed to verify. Please try again.", false);
     verificationBtn.disabled = false;
     verificationBtn.textContent = "Verify";
+    return;
   }
 });

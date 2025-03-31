@@ -77,8 +77,9 @@ signupForm.addEventListener("submit", async (event) => {
       body: JSON.stringify(Object.fromEntries(formData)),
     });
 
-    if (response.ok) {
-      const data = await response.json();
+    const data = await response.json();
+
+    if (response.ok && data.success) {
       showFeedback(data.message, data.success);
 
       setTimeout(() => {
@@ -87,13 +88,15 @@ signupForm.addEventListener("submit", async (event) => {
     } else {
       const error = await response.json();
       showFeedback(error.message, false);
+      signinBtn.disabled = false;
+      signinBtn.textContent = "Create Account";
+      return;
     }
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Create Account";
   } catch (error) {
     console.error(error);
     showFeedback("Failed to create account. Please try again.", false);
     submitBtn.disabled = false;
     submitBtn.textContent = "Create Account";
+    return;
   }
 });
