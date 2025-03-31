@@ -34,5 +34,4 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	response := Response{Success: false, Message: "Successfully logged out"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
-	http.Redirect(w, r, "/sign-in", http.StatusSeeOther)
 }
