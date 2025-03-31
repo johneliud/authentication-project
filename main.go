@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/johneliud/authentication_project/backend/config"
-	"github.com/johneliud/authentication_project/backend/database"
-	"github.com/johneliud/authentication_project/backend/routes"
-	"github.com/johneliud/authentication_project/backend/utils"
+	"github.com/johneliud/authentication-project/backend/config"
+	"github.com/johneliud/authentication-project/backend/database"
+	"github.com/johneliud/authentication-project/backend/routes"
+	"github.com/johneliud/authentication-project/backend/utils"
 )
 
 func main() {

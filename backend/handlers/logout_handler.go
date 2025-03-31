@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/johneliud/authentication_project/backend/config"
+	"github.com/johneliud/authentication-project/backend/config"
 )
 
 // LogoutHandler handles the logout page.

@@ -7,10 +7,10 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/johneliud/authentication_project/backend/config"
-	"github.com/johneliud/authentication_project/backend/database"
-	"github.com/johneliud/authentication_project/backend/models"
-	"github.com/johneliud/authentication_project/backend/utils"
+	"github.com/johneliud/authentication-project/backend/config"
+	"github.com/johneliud/authentication-project/backend/database"
+	"github.com/johneliud/authentication-project/backend/models"
+	"github.com/johneliud/authentication-project/backend/utils"
 )
 
 type Response struct {

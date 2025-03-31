@@ -1,4 +1,4 @@
-module github.com/johneliud/authentication_project
+module github.com/johneliud/authentication-project
 
 go 1.23.4
 

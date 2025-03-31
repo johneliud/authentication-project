@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/johneliud/authentication_project/backend/config"
-	"github.com/johneliud/authentication_project/backend/database"
+	"github.com/johneliud/authentication-project/backend/config"
+	"github.com/johneliud/authentication-project/backend/database"
 )
 
 // VerifyHandler handles the verification page.

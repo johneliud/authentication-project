@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/johneliud/authentication_project/backend/config"
+	"github.com/johneliud/authentication-project/backend/config"
 )
 
 // SessionMiddleware is a middleware that checks if the user is authenticated and redirects to the sign-in page if not.

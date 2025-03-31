@@ -13,11 +13,11 @@ To set up the project locally, follow these steps:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/johneliud/authentication_project.git
+   git clone https://github.com/johneliud/authentication-project.git
    ```
 2. **Navigate to the Project Directory**:
    ```bash
-   cd authentication_project
+   cd authentication-project
    ```
 3. **Set Up Environment Variables**:
    - Create a `.env` file in the root directory.
@@ -28,7 +28,7 @@ To set up the project locally, follow these steps:
      SMTP_SERVER=smtp.gmail.com
      SMTP_PORT=587
      ```
-     
+
 _Note: Replace placeholder values like `your-email@example.com` and `your-username` with your actual information when setting up the project._
 
 4. **Run the Application**:
@@ -49,7 +49,7 @@ We welcome contributions to enhance the Authentication Project. To contribute, p
 1. **Fork the Repository**: Click on the 'Fork' button at the top right corner of the repository page to create a copy of the repository in your GitHub account.
 2. **Clone Your Fork**:
    ```bash
-   git clone https://github.com/your-username/authentication_project.git
+   git clone https://github.com/your-username/authentication-project.git
    ```
 3. **Create a New Branch**:
    ```bash
@@ -70,7 +70,7 @@ Please ensure your contributions align with the project's coding standards and i
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/johneliud/authentication_project/blob/main/LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/johneliud/authentication-project/blob/main/LICENSE) file for more details.
 
 ## Contact
 

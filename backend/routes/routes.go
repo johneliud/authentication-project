@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
-	"github.com/johneliud/authentication_project/backend/handlers"
-	"github.com/johneliud/authentication_project/backend/middleware"
+	"github.com/johneliud/authentication-project/backend/handlers"
+	"github.com/johneliud/authentication-project/backend/middleware"
 )
 
 // InitRoutes initializes the routes for the server.
@@ -27,7 +27,7 @@ func InitRoutes() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		middleware.SessionMiddleware(http.HandlerFunc(handlers.HomeHandler)).ServeHTTP(w, r)
 	})
-	
+
 	http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
 		middleware.SessionMiddleware(http.HandlerFunc(handlers.LogoutHandler)).ServeHTTP(w, r)
 	})
